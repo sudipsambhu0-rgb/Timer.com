@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  * {
+    margin:0;
+    padding:0;
+  }
+  body {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#006FFF;
+    flex-direction:column;
+  }
+  h1 {
+    color:#FF0000;
+  }
+  .card {
+    position:relative;
+    height:380px;
+    width:290px;
+    background:#0D00FF;
+    border-radius:40px;
+    border:5px solid #E63946;
+  }
+  #btn {
+    position:absolute;
+    height:45px;
+    width:90px;
+    top:270px;
+    left:103px;
+    background:linear-gradient(to right , #00FF0F , #00D0FF);
+    border-radius:40px;
+    border:5px solid #18FF00;
+  }
+  #btn:hover {
+    background:#A500FF;
+  }
+  #text {
+    position:absolute;
+    color:#FF0000;
+    top:50px;
+    left:50px;
+    font-size:30px;
+  }
+  #btn2 {
+    position:absolute;
+    display:none;
+    height:50px;
+    width:90px;
+    top:269px;
+    left:160px;
+    background:linear-gradient(to right , #00FF0F , #FF7A00);
+    border-radius:40px;
+    border:5px solid #00F8FF;
+  }
+  #btn2:hover {
+    background:#15FF00;
+  }
+  #btn3 {
+    position:absolute;
+    display:none;
+    height:45px;
+    width:90px;
+    top:270px;
+    left:50px;
+    background:linear-gradient(to right , #00FF0F , #00D0FF);
+    border-radius:40px;
+    border:5px solid #18FF00;
+  }
+  #btn3:hover {
+    background:#FF7A00;
+  }
+  #text {
+    
+  }
+</style>
+</head>
+<body>
+<h1>Timer in seconds</h1>
+  <div class="card">
+    <p id="text">Timer : </p>
+    <button id="btn">Start</button>
+    <button id="btn2">Pause</button>
+    <button id="btn3">restart</button>
+  </div>
+  <script>
+  let btn = document.getElementById("btn");
+  let btn2 = document.getElementById("btn2");
+  let btn3 = document.getElementById("btn3");
+  let text = document.getElementById("text");
+
+  let i = 0;
+  let timerId = null;
+  let running = false;
+
+  function run(){
+    if(!running) return;
+
+    text.innerText = "Timer : " + i + " sec";
+    i++;
+
+    timerId = setTimeout(run, 1000);
+  }
+  btn.addEventListener("click", () => {
+    if(running) return;
+
+    running = true;
+    btn.style.display = "none";
+    btn2.style.display = "block";
+    btn3.style.display = "block";
+
+    run();
+  });
+  btn2.addEventListener("click", () => {
+    running = false;
+    clearTimeout(timerId);
+  });
+  btn3.addEventListener("click", () => {
+    running = false;
+    clearTimeout(timerId);
+
+    i = 0;
+    text.innerText = "Timer : 0 sec";
+
+    running = true;
+    run();
+  });
+</script>
+</body>
+</html>
